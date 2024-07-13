@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "cbgtaxi24.api": "StartDebugging",
+        "cbgtaxi24.blazor": "StartDebugging"
+      }
+    }
+  }
+}

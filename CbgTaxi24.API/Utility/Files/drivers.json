@@ -1,0 +1,157 @@
+[
+  {
+    "Name": "Kwaku",
+    "Phone": "0201234561",
+    "CarNumber": "GC-3121",
+    "ServiceType": 1,
+    "Status": 1,
+    "Rating": 4,
+    "Location": {
+      "Latitude": 5.662995441200403,
+      "Longitude": -0.22850972594898414,
+      "Region": "Region1",
+      "Name": "Dome, Unknown road"
+    }
+  },
+  {
+    "Name": "Bob",
+    "Phone": "0201234562",
+    "CarNumber": "GE-4122",
+    "ServiceType": 1,
+    "Status": 1,
+    "Rating": 4,
+    "Location": {
+      "Latitude": 5.684518811102693,
+      "Longitude": -0.2537868624450905,
+      "Region": "Region1",
+      "Name":  "Kwabenya Roofing Tiles"
+    }
+  },
+  {
+    "Name": "Bill",
+    "Phone": "0201234563",
+    "CarNumber": "GC-1352",
+    "ServiceType": 1,
+    "Status": 1,
+    "Rating": 4,
+    "Location": {
+      "Latitude": 5.668974235616093,
+      "Longitude": -0.24799329126177247,
+      "Region": "Region1",
+      "Name":  "Ga East, Unknown road"
+    }
+  },
+  {
+    "Name": "George",
+    "Phone": "0235534561",
+    "CarNumber": "AS-4381",
+    "ServiceType": 1,
+    "Status": 1,
+    "Rating": 4,
+    "Location": {
+      "Latitude": 5.653030621505309,
+      "Longitude": -0.2169796474926391,
+      "Region": "Region2",
+      "Name":  "Dome Pillar 2"
+    }
+  },
+  {
+    "Name": "Mandela",
+    "Phone": "0509234562",
+    "CarNumber": "WE-2222",
+    "ServiceType": 1,
+    "Status": 1,
+    "Rating": 4,
+    "Location": {
+      "Latitude": 5.667422577276311,
+      "Longitude": -0.20895447847311924,
+      "Region": "Region2",
+      "Name":  "M&S Eden center"
+    }
+  },
+  {
+    "Name": "Will",
+    "Phone": "0593534563",
+    "CarNumber": "GC-9510",
+    "ServiceType": 2,
+    "Status": 1,
+    "Rating": 4,
+    "Location": {
+      "Latitude": 5.661825435765081,
+      "Longitude": -0.25493893631877934,
+      "Region": "Region3",
+      "Name":  "Kessnuel Law Consult"
+    }
+  },
+  {
+    "Name": "David",
+    "Phone": "0549234562",
+    "CarNumber": "AS-3222",
+    "ServiceType": 1,
+    "Status": 1,
+    "Rating": 4,
+    "Location": {
+      "Latitude": 5.658848013583389,
+      "Longitude": -0.2533871604156209,
+      "Region": "Region3",
+      "Name": "Taifa Market"
+    }
+  },
+  {
+    "Name": "Sam",
+    "Phone": "0593530003",
+    "CarNumber": "GN-9190",
+    "ServiceType": 2,
+    "Status": 1,
+    "Rating": 4,
+    "Location": {
+      "Latitude": 5.651032725854436,
+      "Longitude": -0.24690694375872438,
+      "Region": "Region3",
+      "Name": "Cfc estates"
+    }
+  },
+  {
+    "Name": "Morris",
+    "Phone": "0233530003",
+    "CarNumber": "GN-3200",
+    "ServiceType": 2,
+    "Status": 2,
+    "Rating": 4,
+    "Location": {
+      "Latitude": 5.650306710151902,
+      "Longitude": -0.2512628511743042,
+      "Region": "Region3",
+      "Name": "Shell fuel station taifa"
+    }
+  }
+  ,
+  {
+    "Name": "Julian",
+    "Phone": "0541330003",
+    "CarNumber": "GN-3467",
+    "ServiceType": 2,
+    "Status": 1,
+    "Rating": 5,
+    "Location": {
+      "Latitude": 5.64508625442472,
+      "Longitude": -0.1530439795905127,
+      "Region": "Region4",
+      "Name": "FlyOver luxury apartment"
+    }
+  },
+  {
+    "Name": "Leonardo",
+    "Phone": "0233530003",
+    "CarNumber": "GN-3200",
+    "ServiceType": 2,
+    "Status": 2,
+    "Rating": 4,
+    "Location": {
+      "Latitude": 5.639096536302731,
+      "Longitude": -0.15397738828115837,
+      "Region": "Region4",
+      "Name": "Briefcase Pub and Shisha"
+    }
+  }
+]

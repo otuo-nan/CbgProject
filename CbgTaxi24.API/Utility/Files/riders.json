@@ -1,0 +1,52 @@
+[
+  {
+    "FirstName": "Kofi",
+    "LastName": "Wells",
+    "Location": {
+      "Latitude": 5.693774885842252,
+      "Longitude": -0.24502141829120092,
+      "Region": "Region1",
+      "Name":  "Daylight Int School, Kwabenya"
+    }
+  },
+  {
+    "FirstName": "Yaw",
+    "LastName": "Wilson",
+    "Location": {
+      "Latitude": 5.662276533292582,
+      "Longitude": -0.20558562416544685,
+      "Region": "Region2",
+      "Name":  "Starbites, East Legon"
+    }
+  },
+  {
+    "FirstName": "Will",
+    "LastName": "Blidge",
+    "Location": {
+      "Latitude": 5.652659074929336,
+      "Longitude": -0.25059903239663417,
+      "Region": "Region3",
+      "Name": "Prudential Bank Taifa"
+    }
+  },
+  {
+    "FirstName": "Charles",
+    "LastName": "Blidge",
+    "Location": {
+      "Latitude": 5.643731330945747,
+      "Longitude": -0.15833318827350723,
+      "Region": "Region4",
+      "Name": "Papa Pizza, East Legon"
+    }
+  },
+  {
+    "FirstName": "Jonathan",
+    "LastName": "Brayden",
+    "Location": {
+      "Latitude": 5.560773668661026,
+      "Longitude": -0.2642274375257799,
+      "Region": "Region5",
+      "Name": "St Martin De Porres"
+    }
+  }
+]

@@ -1,0 +1,6 @@
+@CbgTaxi24.API_HostAddress = http://localhost:5081
+
+GET {{CbgTaxi24.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

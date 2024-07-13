@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  sqldata:
+      image: mcr.microsoft.com/mssql/server:2019-latest
+      environment:
+        - SA_PASSWORD=Pass@word
+        - ACCEPT_EULA=Y
+      ports:
+         - "5422:1433"
+      volumes:
+        - cbgTaxi24-sqldata:/var/opt/mssql
+ 
+  taxi24.api:
+    image: ${DOCKER_REGISTRY-}cbgtaxi24api
+    build:
+      context: .
+      dockerfile: CbgTaxi24.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "5134:8080"
+    depends_on:
+     - sqldata
+    
+
+  taxi24.blazor:
+    image: ${DOCKER_REGISTRY-}cbgtaxi24blazor
+    build:
+      context: .
+      dockerfile: CbgTaxi24.Blazor/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5135:80"
+
+
+volumes:
+ cbgTaxi24-sqldata:
+   external: false
