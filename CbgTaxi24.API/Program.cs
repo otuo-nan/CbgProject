@@ -1,4 +1,5 @@
 
+using CbgTaxi24.API.Application.Queries;
 using CbgTaxi24.API.Data;
 using CbgTaxi24.API.Workers;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,17 @@ namespace CbgTaxi24.API
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddHostedService<DbSeeder>();
+            builder.Services.AddScoped<RiderQueries>(service =>
+            {               
+                var configuration = service.GetRequiredService<IConfiguration>();
+                return new RiderQueries(configuration.GetConnectionString("DefaultConnection")!);
+            });
+            
+            builder.Services.AddScoped<DriverQueries>(service =>
+            {               
+                var configuration = service.GetRequiredService<IConfiguration>();
+                return new DriverQueries(configuration.GetConnectionString("DefaultConnection")!);
+            });
 
             var app = builder.Build();
 

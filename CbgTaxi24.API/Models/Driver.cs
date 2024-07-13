@@ -8,9 +8,10 @@ namespace CbgTaxi24.API.Models
         Standard = 1, Premium = 2, Delivery = 3
     }
 
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum DriverStatus : byte
     {
-        Active = 1, InActive = 2, Suspended = 3
+        Available = 1, Unavailable = 2, Suspended = 3
     }
 
     public class Driver
