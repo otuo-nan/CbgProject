@@ -11,5 +11,6 @@
         public Guid LocationId { get; set; }
         public Location Location { get; set; } = default!;
         public ICollection<Trip> Trips { get; set; } = [];
+        public ICollection<Invoice> Invoices { get; set; } = [];
     }
 }

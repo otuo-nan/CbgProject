@@ -12,6 +12,9 @@
         public decimal Price { get; set; }
 
         //rel
+        public Guid RiderId { get; set; }
+        public Guid DriverId { get; set; }
+
         public Driver Driver { get; set; } = default!;
         public Rider Rider { get; set; } = default!;
     }

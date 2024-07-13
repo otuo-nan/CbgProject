@@ -6,8 +6,8 @@ namespace CbgTaxi24.API.Models
     public class Location
     {
         public Guid LocationId { get; set; }
-        public decimal Longitude { get; set; }
         public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
         public required string Region { get; set; }
         public string? Name { get; set; }
     }

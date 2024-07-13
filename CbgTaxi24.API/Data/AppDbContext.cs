@@ -11,8 +11,13 @@ namespace CbgTaxi24.API.Data
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
 
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new RiderConfigurations());
+            builder.ApplyConfiguration(new DriverConfigurations());
+            builder.ApplyConfiguration(new InvoiceConfigurations());
             builder.ApplyConfiguration(new LocationConfigurations());
             builder.ApplyConfiguration(new TripConfigurations());
 
