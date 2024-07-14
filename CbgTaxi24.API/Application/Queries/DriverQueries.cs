@@ -1,5 +1,4 @@
-﻿using CbgTaxi24.API.Application.Queries.Dtos;
-using CbgTaxi24.API.Infrastructure.Exceptions;
+﻿using CbgTaxi24.API.Infrastructure.Exceptions;
 using CbgTaxi24.API.Models;
 using Dapper;
 using Microsoft.Data.SqlClient;

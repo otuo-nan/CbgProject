@@ -1,7 +1,4 @@
-﻿using CbgTaxi24.API.Application.Queries.Dtos;
-using CbgTaxi24.API.Application.Requests;
-using CbgTaxi24.API.Data;
-using CbgTaxi24.API.Infrastructure.Exceptions;
+﻿using CbgTaxi24.API.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CbgTaxi24.API.Application.Services

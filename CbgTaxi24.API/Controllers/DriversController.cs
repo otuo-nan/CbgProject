@@ -1,4 +1,5 @@
 ﻿using CbgTaxi24.API.Application.Requests;
+using CbgTaxi24.API.Application.Services;
 
 namespace CbgTaxi24.API.Controllers
 {
@@ -16,7 +17,6 @@ namespace CbgTaxi24.API.Controllers
         //get driver by id
         [HttpGet("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(DriverDto2))]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ErrorDto))]
         public async Task<IActionResult> GetDrivers(Guid id)
         {
             return Ok(await _driverQueries.GetDriverAsync(id));
@@ -63,8 +63,11 @@ namespace CbgTaxi24.API.Controllers
             });
         }
 
-
-
-        //Complete a trip
+        [HttpPut("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(TripDto))]
+        public async Task<IActionResult> CompleteTrip([FromServices]DriverService service, Guid id)
+        {
+            return Ok(await service.CompleteTripAsync(id));
+        }
     }
 }

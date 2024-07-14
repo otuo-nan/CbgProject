@@ -1,5 +1,4 @@
-﻿using CbgTaxi24.API.Application.Queries.Dtos;
-using Dapper;
+﻿using Dapper;
 using Microsoft.Data.SqlClient;
 
 namespace CbgTaxi24.API.Application.Queries

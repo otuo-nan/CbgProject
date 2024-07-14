@@ -39,6 +39,7 @@ namespace CbgTaxi24.API
             });
 
             builder.Services.AddScoped<RiderService>();
+            builder.Services.AddScoped<DriverService>();
             builder.Services.AddHostedService<DbSeeder>();
 
             var app = builder.Build();
