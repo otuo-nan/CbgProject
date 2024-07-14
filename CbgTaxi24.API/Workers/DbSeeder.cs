@@ -1,5 +1,4 @@
-﻿using CbgTaxi24.API.Data;
-using CbgTaxi24.API.Models;
+﻿using CbgTaxi24.API.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 
@@ -11,6 +10,8 @@ namespace CbgTaxi24.API.Workers
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             using var scope = serviceProvider.CreateAsyncScope();
+
+            var configuration = scope.ServiceProvider.GetService<IConfiguration>(); 
 
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 

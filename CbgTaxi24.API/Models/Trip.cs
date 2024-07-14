@@ -5,7 +5,7 @@
         Active = 1, Completed = 2
     }
 
-    public class Trip
+    public class Trip : Entity
     {
         public Guid TripId { get; set; }
 
@@ -15,6 +15,7 @@
         public decimal ToLong { get; set; }
 
         public decimal Price { get; set; }
+        public string Metadata { get; set; } = default!;
         public TripStatus Status { get; set; }
 
         //rel
@@ -23,5 +24,11 @@
 
         public Driver Driver { get; set; } = default!;
         public Rider Rider { get; set; } = default!;
+    }
+
+    public class TripMetaData
+    {
+        public LocationDto FromLocation { get; set; } = default!;
+        public LocationDto ToLocation { get; set; } = default!;
     }
 }

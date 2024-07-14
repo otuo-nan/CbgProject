@@ -1,6 +1,6 @@
 ﻿namespace CbgTaxi24.API.Models
 {
-    public class Rider
+    public class Rider : Entity
     {
         public Guid RiderId { get; set; }
         public required string FirstName { get; set; }

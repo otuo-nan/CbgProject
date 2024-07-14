@@ -1,25 +1,18 @@
 ﻿using CbgTaxi24.API.Application.Requests;
-using CbgTaxi24.API.Application.Services;
 
 namespace CbgTaxi24.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DriversController : ControllerBase
+    public class DriversController(DriverQueries driverQueries) : ControllerBase
     {
-        readonly DriverQueries _driverQueries;
-
-        public DriversController(DriverQueries driverQueries)
-        {
-            _driverQueries = driverQueries;
-        }
 
         //get driver by id
         [HttpGet("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(DriverDto2))]
         public async Task<IActionResult> GetDrivers(Guid id)
         {
-            return Ok(await _driverQueries.GetDriverAsync(id));
+            return Ok(await driverQueries.GetDriverAsync(id));
         }
 
 
@@ -32,11 +25,11 @@ namespace CbgTaxi24.API.Controllers
 
             options.ValidateOptions<DriverDto>();
 
-            options.SetUpRestOfDto(await _driverQueries.GetCountOfDriversAsync(options.FilterBy, options.FilterByValue));
+            options.SetUpRestOfDto(await driverQueries.GetCountOfDriversAsync(options.FilterBy, options.FilterByValue));
 
             return Ok(new PaginatedEntities<DriversPagingOptions, DriverDto>
             {
-                Data = await _driverQueries.GetAllDriversAsync(options.PageNum - 1, options.PageSize, 
+                Data = await driverQueries.GetAllDriversAsync(options.PageNum - 1, options.PageSize, 
                                                 options.SortField, options.SortDirection, options.FilterBy, options.FilterByValue),
                 PagingOptions = options
             });
@@ -51,12 +44,12 @@ namespace CbgTaxi24.API.Controllers
 
             options.ValidateOptions<DriversFromALocationDto>();
 
-            options.SetUpRestOfDto(await _driverQueries.GetCountDriversWithinSpecificLocationAsync(request.Latitude, request.Longitude, request.MaxRangeFromLocationInKm, 
+            options.SetUpRestOfDto(await driverQueries.GetCountDriversWithinSpecificLocationAsync(request.Latitude, request.Longitude, request.MaxRangeFromLocationInKm, 
                                                      options.FilterBy, options.FilterByValue));
 
             return Ok(new PaginatedEntities<DriversWithinSpecificLocationPagingOptions, DriversFromALocationDto>
             {
-                Data = await _driverQueries.GetDriversWithinSpecificLocationAsync(request.Latitude, request.Longitude, request.MaxRangeFromLocationInKm,
+                Data = await driverQueries.GetDriversWithinSpecificLocationAsync(request.Latitude, request.Longitude, request.MaxRangeFromLocationInKm,
                                                 options.PageNum - 1, options.PageSize, 
                                                 options.SortField, options.SortDirection, options.FilterBy, options.FilterByValue),
                 PagingOptions = options

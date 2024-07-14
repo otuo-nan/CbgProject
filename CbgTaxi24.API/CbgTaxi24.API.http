@@ -10,6 +10,9 @@ Accept: application/json
 GET {{HostAddress}}/api/drivers/from-location?Latitude=5.662276533292582&Longitude=-0.20558562416544685&MaxRangeFromLocationInKm=3
 Accept: application/json
 
+###
+GET {{HostAddress}}/api/
+
 
 //rider related
 ###
@@ -23,6 +26,10 @@ Accept: application/json
 ###
 GET {{HostAddress}}/api/Riders?pageSize=3&pageNum=1
 Accept: application/json
+
+//backoffice
+###
+GET {{HostAddress}}/api/BackOffice?filter=All&pageSize=10&pageNum=1
 
 
 

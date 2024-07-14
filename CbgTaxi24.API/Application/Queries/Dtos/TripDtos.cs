@@ -1,5 +1,6 @@
 ﻿using CbgTaxi24.API.Models;
 
+#nullable disable
 namespace CbgTaxi24.API.Application.Queries.Dtos
 {
     public class TripDto
@@ -16,5 +17,11 @@ namespace CbgTaxi24.API.Application.Queries.Dtos
 
         public Guid RiderId { get; set; }
         public Guid DriverId { get; set; }
+    }
+    
+    public class TripDto2 : TripDto
+    {
+        public DriverDto Driver { get; set; }
+        public RiderDto Rider { get; set; }
     }
 }

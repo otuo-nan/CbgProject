@@ -1,23 +1,25 @@
-using CbgTaxi24.API.Application.Services;
 using CbgTaxi24.API.Data;
+using CbgTaxi24.API.Database;
 using CbgTaxi24.API.Workers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CbgTaxi24.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var dbConstr = builder.Configuration.GetConnectionString("DefaultConnection")!;
             // Add services to the container.
 
             builder.Services.AddControllers();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(dbConstr);
             });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -29,17 +31,21 @@ namespace CbgTaxi24.API
             builder.Services.AddScoped(service =>
             {               
                 var configuration = service.GetRequiredService<IConfiguration>();
-                return new RiderQueries(configuration.GetConnectionString("DefaultConnection")!);
+                return new RiderQueries(dbConstr);
             });
             
             builder.Services.AddScoped(service =>
             {               
                 var configuration = service.GetRequiredService<IConfiguration>();
-                return new DriverQueries(configuration.GetConnectionString("DefaultConnection")!);
+                return new DriverQueries(dbConstr);
             });
 
             builder.Services.AddScoped<RiderService>();
             builder.Services.AddScoped<DriverService>();
+            builder.Services.AddScoped<BackOfficeService>();
+
+            await DatabaseFunctions.AddFunctions(dbConstr);
+
             builder.Services.AddHostedService<DbSeeder>();
 
             var app = builder.Build();

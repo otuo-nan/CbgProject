@@ -1,7 +1,4 @@
 ﻿using CbgTaxi24.API.Application.Commands;
-using CbgTaxi24.API.Application.Services;
-using CbgTaxi24.API.Infrastructure.Exceptions;
-using MediatR;
 
 namespace CbgTaxi24.API.Controllers
 {

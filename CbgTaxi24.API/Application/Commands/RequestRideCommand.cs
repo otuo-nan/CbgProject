@@ -1,5 +1,4 @@
 ﻿using CbgTaxi24.API.Application.SeedWork;
-using CbgTaxi24.API.Infrastructure.Exceptions;
 using CbgTaxi24.API.Models;
 using CbgTaxi24.API.Utility;
 using Microsoft.EntityFrameworkCore;

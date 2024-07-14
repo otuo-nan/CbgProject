@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CbgTaxi24.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240713005521_Initial-create")]
-    partial class Initialcreate
+    [Migration("20240714170008_Initial_create")]
+    partial class Initial_create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,12 @@ namespace CbgTaxi24.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("LocationId")
                         .HasColumnType("uniqueidentifier");
 
@@ -52,8 +58,17 @@ namespace CbgTaxi24.API.Migrations
                     b.Property<byte>("ServiceType")
                         .HasColumnType("tinyint");
 
+                    b.Property<bool>("SoftDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<byte>("Status")
                         .HasColumnType("tinyint");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("DriverId");
 
@@ -69,14 +84,29 @@ namespace CbgTaxi24.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("double(9, 2)");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(9, 2)");
 
                     b.Property<Guid>("RiderId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("SoftDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("TripId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("InvoiceId");
 
@@ -93,11 +123,11 @@ namespace CbgTaxi24.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Latitude")
-                        .HasColumnType("double(8, 6)");
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("decimal(8, 6)");
 
-                    b.Property<double>("Longitude")
-                        .HasColumnType("double(9, 6)");
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("decimal(9, 6)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -117,6 +147,12 @@ namespace CbgTaxi24.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -129,6 +165,15 @@ namespace CbgTaxi24.API.Migrations
 
                     b.Property<string>("OtherNames")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("SoftDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("RiderId");
 
@@ -144,26 +189,48 @@ namespace CbgTaxi24.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("DriverId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("FromLat")
-                        .HasColumnType("double(8, 6)");
+                    b.Property<decimal>("FromLat")
+                        .HasColumnType("decimal(8, 6)");
 
-                    b.Property<double>("FromLong")
-                        .HasColumnType("double(9, 6)");
+                    b.Property<decimal>("FromLong")
+                        .HasColumnType("decimal(9, 6)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("double(9, 2)");
+                    b.Property<string>("Metadata")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(9, 2)");
 
                     b.Property<Guid>("RiderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("ToLat")
-                        .HasColumnType("double(8, 6)");
+                    b.Property<bool>("SoftDeleted")
+                        .HasColumnType("bit");
 
-                    b.Property<double>("ToLong")
-                        .HasColumnType("double(9, 6)");
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
+
+                    b.Property<decimal>("ToLat")
+                        .HasColumnType("decimal(8, 6)");
+
+                    b.Property<decimal>("ToLong")
+                        .HasColumnType("decimal(9, 6)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("TripId");
 

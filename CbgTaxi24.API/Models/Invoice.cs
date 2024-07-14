@@ -1,6 +1,6 @@
 ﻿namespace CbgTaxi24.API.Models
 {
-    public class Invoice
+    public class Invoice : Entity
     {
         public Guid InvoiceId { get; set; }
         public decimal Price { get; set; }

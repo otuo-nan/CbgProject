@@ -14,7 +14,7 @@ namespace CbgTaxi24.API.Models
         Available = 1, Unavailable = 2, Suspended = 3
     }
 
-    public class Driver
+    public class Driver : Entity
     {
         public Guid DriverId { get; set; }
         public required string Name { get; set; }
