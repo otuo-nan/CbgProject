@@ -1,8 +1,6 @@
-using CbgTaxi24.API.Data;
-using CbgTaxi24.API.Database;
+using CbgTaxi24.API.Infrastructure.Database;
 using CbgTaxi24.API.Workers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace CbgTaxi24.API
 {
@@ -44,12 +42,11 @@ namespace CbgTaxi24.API
             builder.Services.AddScoped<DriverService>();
             builder.Services.AddScoped<BackOfficeService>();
 
-            await DatabaseFunctions.AddFunctions(dbConstr);
-
             builder.Services.AddHostedService<DbSeeder>();
 
             var app = builder.Build();
 
+            app.UseMigrations();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

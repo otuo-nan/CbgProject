@@ -11,8 +11,6 @@ namespace CbgTaxi24.API.Workers
         {
             using var scope = serviceProvider.CreateAsyncScope();
 
-            var configuration = scope.ServiceProvider.GetService<IConfiguration>(); 
-
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
             await dbContext.Database.MigrateAsync(cancellationToken: cancellationToken);

@@ -1,23 +1,41 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
-namespace CbgTaxi24.API.Database
+namespace CbgTaxi24.API.Infrastructure.Database
 {
-    public static class DatabaseFunctions
+    public static class Database
     {
-        public static async Task AddFunctions(string constr)
+        public static WebApplication UseMigrations(this WebApplication app)
         {
-            await AddCalculateDistanceAsync(constr);
+            using var scope = app.Services.CreateScope();
+            var logger = scope.ServiceProvider.GetService<ILogger<Program>>();
+
+            logger!.LogInformation("db migrations start");
+            var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+            db.Database.Migrate();
+
+            AddFunctions(app.Configuration.GetConnectionString("DefaultConnection")!);
+
+            logger!.LogInformation("db migrations end");
+
+            return app;
         }
-        static async Task AddCalculateDistanceAsync(string constr)
+
+        public static void AddFunctions(string constr)
+        {
+            AddCalculateDistance(constr);
+        }
+
+        static void AddCalculateDistance(string constr)
         {
             string _connectionString = !string.IsNullOrWhiteSpace(constr) ? constr : throw new ArgumentNullException(nameof(constr));
 
-            var sql = @"IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo.CalculateDistance') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT'))
-                        DROP FUNCTION dbo.CalculateDistance;
+            var sql1 = @"IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo.CalculateDistance') AND type IN (N'FN', N'IF', N'TF', N'FS', N'FT'))
+                        DROP FUNCTION dbo.CalculateDistance;";
 
-                        GO
-                        CREATE FUNCTION dbo.CalculateDistance (
+            var sql2 = @"CREATE FUNCTION dbo.CalculateDistance (
                             @lat1 FLOAT,
                             @lon1 FLOAT,
                             @lat2 FLOAT,
@@ -40,19 +58,18 @@ namespace CbgTaxi24.API.Database
                             DECLARE @distance FLOAT = @radius * @c;
 
                             RETURN @distance;
-                        END;
-
-                        GO";
+                        END;";
 
             try
             {
                 using var connection = new SqlConnection(_connectionString);
-                await connection.ExecuteAsync(sql);
+                //connection.Execute(sql1);
+                connection.Execute(sql2);
                 Console.WriteLine("Function dbo.CalculateDistance created successfully.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error creating function: {ex.Message}");
+                //Console.WriteLine($"Error creating function: {ex.Message}");
             }
         }
     }
