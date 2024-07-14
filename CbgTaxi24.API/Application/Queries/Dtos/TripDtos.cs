@@ -22,6 +22,6 @@ namespace CbgTaxi24.API.Application.Queries.Dtos
     public class TripDto2 : TripDto
     {
         public DriverDto Driver { get; set; }
-        public RiderDto Rider { get; set; }
+        public TripRiderDto Rider { get; set; }
     }
 }

@@ -4,10 +4,11 @@
     [ApiController]
     public class BackOfficeController(BackOfficeService service) : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("trips")]
         public async Task<IActionResult> GetTrips([FromQuery] TripFilter filter,[FromQuery]int pageSize = 10, [FromQuery] int pageNum = 1)
         {
-            return Ok(await (service.GetTripsAsync(pageSize, pageNum, filter)));
+            return pageNum == 0 ? throw new PlatformException("pageNum cannot be zero") 
+                                        : Ok(await (service.GetTripsAsync(pageSize, pageNum, filter)));
         }
     }
 }

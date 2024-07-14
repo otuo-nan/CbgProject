@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
 using CbgTaxi24.API.Infrastructure.ActionResults;
-using CbgTaxi24.API.Infrastructure.Exceptions;
 
 namespace CbgTaxi24.API.Infrastructure.Filters
 {

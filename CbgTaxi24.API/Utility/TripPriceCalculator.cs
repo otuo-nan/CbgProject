@@ -15,7 +15,7 @@
             { 7, 70.0f },
             { 8, 75.0f },
             { 9, 80.0f },
-            { 8, 85.0f },
+            { 10, 85.0f },
         };
 
         public static float GetPrice(double distance)

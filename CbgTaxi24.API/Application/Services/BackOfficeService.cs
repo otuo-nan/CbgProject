@@ -64,7 +64,7 @@ namespace CbgTaxi24.API.Application.Services
                         Status = t.Driver.Status,
                         Rating = t.Driver.Rating,
                     },
-                    Rider = new RiderDto
+                    Rider = new TripRiderDto
                     {
                         RiderId = t.Rider.RiderId,
                         FirstName = t.Rider.FirstName,

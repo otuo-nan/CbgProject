@@ -56,8 +56,8 @@ namespace CbgTaxi24.API.Controllers
             });
         }
 
-        [HttpPut("{id}")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(TripDto))]
+        [HttpPut("complete-trip/{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(InvoiceDto))]
         public async Task<IActionResult> CompleteTrip([FromServices]DriverService service, Guid id)
         {
             return Ok(await service.CompleteTripAsync(id));

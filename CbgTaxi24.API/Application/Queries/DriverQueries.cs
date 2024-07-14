@@ -1,5 +1,4 @@
-﻿using CbgTaxi24.API.Infrastructure.Exceptions;
-using CbgTaxi24.API.Models;
+﻿using CbgTaxi24.API.Models;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
@@ -151,8 +150,8 @@ namespace CbgTaxi24.API.Application.Queries
                     Rating = driver.Rating,
                     Location = new LocationDto
                     {
-                        Latitude = driver.Latitude,
-                        Longitude = driver.Longitude,
+                        Latitude = (double)driver.Latitude,
+                        Longitude = (double)driver.Longitude,
                         //Region = driver.Region,
                         Name = driver.LocationName,
                     }

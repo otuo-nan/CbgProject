@@ -13,6 +13,14 @@ namespace CbgTaxi24.API.Application.Queries.Dtos
         public string LocationName { get; set; }
     }
 
+    public class TripRiderDto
+    {
+        public Guid RiderId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string OtherNames { get; set; }
+    }
+
 
     public class LocationDto
     {

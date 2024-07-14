@@ -1,4 +1,5 @@
 using CbgTaxi24.API.Infrastructure.Database;
+using CbgTaxi24.API.Infrastructure.Filters;
 using CbgTaxi24.API.Workers;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +14,10 @@ namespace CbgTaxi24.API
             var dbConstr = builder.Configuration.GetConnectionString("DefaultConnection")!;
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add<HttpGlobalExceptionFilter>();
+            });
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {

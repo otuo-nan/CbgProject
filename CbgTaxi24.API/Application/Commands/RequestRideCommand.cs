@@ -2,6 +2,7 @@
 using CbgTaxi24.API.Models;
 using CbgTaxi24.API.Utility;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace CbgTaxi24.API.Application.Commands
 {
@@ -10,8 +11,11 @@ namespace CbgTaxi24.API.Application.Commands
         public Guid RiderId { get; set; }
         public double CurrentLatitude { get; set; }
         public double CurrentLongitude { get; set; }
+        public string? CurrentLocName { get; set; }
         public double DestinationLatitude { get; set; }
         public double DestinationLongitude { get; set; }
+        public string? DestinationName { get; set; }
+
 
         public double Distance => double.Round(DistanceCalculator.GetDistance(CurrentLatitude, CurrentLongitude, DestinationLatitude, DestinationLongitude) / 1000, 2);
     }
@@ -42,6 +46,7 @@ namespace CbgTaxi24.API.Application.Commands
                     FromLong = (decimal)request.CurrentLongitude,
                     ToLat = (decimal)request.DestinationLatitude,
                     ToLong = (decimal)request.DestinationLongitude,
+                    Metadata = TripMetadata(request),
                     Status = TripStatus.Active,
                     Price = (decimal)TripPriceCalculator.GetPrice(request.Distance),
                     RiderId = request.RiderId,
@@ -55,6 +60,27 @@ namespace CbgTaxi24.API.Application.Commands
             }
 
             throw new PlatformException("invalid riderId");
+
+
+            static string TripMetadata(RequestRideCommand request)
+            {
+                return JsonSerializer.Serialize(new TripMetaData
+                {
+                    FromLocation = new LocationDto
+                    {
+                        Latitude = request.CurrentLatitude,
+                        Longitude = request.CurrentLongitude,
+                        Name = request.CurrentLocName
+                    },
+
+                    ToLocation = new LocationDto
+                    {
+                        Latitude = request.DestinationLatitude,
+                        Longitude = request.DestinationLongitude,
+                        Name = request.DestinationName
+                    },
+                });
+            }
 
             static TripDto MapTrip(Trip trip)
             {

@@ -1,5 +1,8 @@
-﻿namespace CbgTaxi24.API.Models
+﻿using System.Text.Json.Serialization;
+
+namespace CbgTaxi24.API.Models
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum TripStatus : byte
     {
         Active = 1, Completed = 2
@@ -15,6 +18,8 @@
         public decimal ToLong { get; set; }
 
         public decimal Price { get; set; }
+
+        //data storage for invoice purposes
         public string Metadata { get; set; } = default!;
         public TripStatus Status { get; set; }
 
