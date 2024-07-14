@@ -26,13 +26,7 @@ namespace CbgTaxi24.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ErrorDto))]
         public async Task<IActionResult> GetDrivers(Guid id)
         {
-           var driver = await _driverQueries.GetDriverAsync(id);
-
-            if (driver == null) {
-                return BadRequest(new ErrorDto { Errors = ["driver not found"] });
-            }
-
-            return Ok(driver);
+            return Ok(await _driverQueries.GetDriverAsync(id));
         }
 
 

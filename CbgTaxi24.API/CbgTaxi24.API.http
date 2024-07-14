@@ -3,7 +3,25 @@ GET {{HostAddress}}/api/drivers
 Accept: application/json
 
 ###
+GET {{HostAddress}}/api/drivers/6da733c7-fcb2-4fab-804c-08dca2d8f5f8
+Accept: application/json
+
+###
 GET {{HostAddress}}/api/drivers/from-location?Latitude=5.662276533292582&Longitude=-0.20558562416544685&MaxRangeFromLocationInKm=3
+Accept: application/json
+
+
+//rider related
+###
+GET {{HostAddress}}/api/riders/closest-drivers?riderLocLatitude=5.662276533292582&riderLocLongitude=-0.20558562416544685&nClosestDrivers=3
+Accept: application/json
+
+###
+GET {{HostAddress}}/api/Riders/4257C77B-30CE-4B3D-FB08-08DCA2D8F5F0
+Accept: application/json
+
+###
+GET {{HostAddress}}/api/Riders?pageSize=3&pageNum=1
 Accept: application/json
 
 

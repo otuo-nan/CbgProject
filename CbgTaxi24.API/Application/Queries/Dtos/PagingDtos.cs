@@ -33,7 +33,7 @@ namespace CbgTaxi24.API.Application.Queries.Dtos
 
 
         #region helpers
-        public void SetUpRestOfDto(int queryCount)
+        public void SetUpRestOfDto(long queryCount)
         {
             TotalCount = queryCount;
 

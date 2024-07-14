@@ -13,38 +13,23 @@ namespace CbgTaxi24.API.Application.Queries
     {
         readonly string _connectionString = !string.IsNullOrWhiteSpace(constr) ? constr : throw new ArgumentNullException(nameof(constr));
 
-        public async Task<IEnumerable<RiderDto>> GetAllRidersAsync(int skip, int pageSize, string orderBy, OrderDirection orderDirection)
+        public async Task<IEnumerable<DriversFromALocationDto>> GetClosestDriversAsync(decimal riderLocLatitude, decimal riderLocLongitude, int nClosestDrivers)
         {
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
 
-            var result = await connection.QueryAsync<dynamic>(
-                  @$"SELECT r.RiderId, r.FirstName, r.Phone, r.CarNumber, r.ServiceType, r.Status, r.Rating, l.Latitude, l.Longitude, l.Region, l.Name
-	                    FROM Riders r JOIN Locations l 
-	                    ON r.LocationId = l.LocationId
-	                    ORDER BY @orderBy {(orderDirection == OrderDirection.ASC ? "ASC" : "DESC")}
-                        OFFSET @skip ROWS
-                        FETCH NEXT @pageSize ROWS ONLY", new { orderBy, skip, pageSize }
+            var result = await connection.QueryAsync<DriversFromALocationDto>(
+                  @$"Select TOP(@nClosestDrivers) d.DriverId, d.Name, d.Phone, d.CarNumber, d.ServiceType, d.Status, d.Rating, l.Latitude, l.Longitude, l.Region, l.Name AS LocationName,
+                        ROUND(dbo.CalculateDistance(@riderLocLatitude, @riderLocLongitude, l.Latitude, l.Longitude), 2) AS Distance
+	                    FROM Drivers d JOIN Locations l
+	                    ON d.LocationId = l.LocationId 
+                        ORDER BY Distance", new { riderLocLatitude, riderLocLongitude, nClosestDrivers }
                 );
 
-            if (result.AsList().Count == 0)
-                return new List<RiderDto>();
+            if (!result.Any())
+                return [];
 
-            return [];
+            return result;
         }
-
-        //private IEnumerable<DriverDto> MapDrivers(dynamic result)
-        //{
-        //    List<DriverDto> drivers = [];
-
-        //    foreach (dynamic driver in result)
-        //    {
-        //        drivers.Add(new DriverDto
-        //        {
-        //            DriverId = driver.DriverId,
-        //            Name = driver.Name,
-        //        });
-        //    }
-        //}
     }
 }

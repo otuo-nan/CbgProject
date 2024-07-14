@@ -10,7 +10,7 @@ namespace CbgTaxi24.API.Application.Queries
     {
         readonly string _connectionString = !string.IsNullOrWhiteSpace(constr) ? constr : throw new ArgumentNullException(nameof(constr));
 
-        public async Task<DriverDto2?> GetDriverAsync(Guid id)
+        public async Task<DriverDto2> GetDriverAsync(Guid id)
         {
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
@@ -19,7 +19,7 @@ namespace CbgTaxi24.API.Application.Queries
                 @$"SELECT d.DriverId, d.Name, d.Phone, d.CarNumber, d.ServiceType, d.Status, d.Rating, l.Latitude, l.Longitude, l.Region, l.Name AS LocationName
 	                    FROM Drivers d JOIN Locations l 
 	                    ON d.LocationId = l.LocationId
-                        WHERE DriverId = @id", new { id} ) ?? default;
+                        WHERE DriverId = @id", new { id} ) ?? throw new PlatformException("not found");
         }
         
         public async Task<int> GetCountOfDriversAsync(FilterDriversBy? filterBy, string? filterByValue)
