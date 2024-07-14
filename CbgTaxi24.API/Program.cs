@@ -1,5 +1,3 @@
-
-using CbgTaxi24.API.Application.Queries;
 using CbgTaxi24.API.Application.Services;
 using CbgTaxi24.API.Data;
 using CbgTaxi24.API.Workers;
@@ -26,7 +24,8 @@ namespace CbgTaxi24.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddHostedService<DbSeeder>();
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+
             builder.Services.AddScoped(service =>
             {               
                 var configuration = service.GetRequiredService<IConfiguration>();
@@ -40,6 +39,7 @@ namespace CbgTaxi24.API
             });
 
             builder.Services.AddScoped<RiderService>();
+            builder.Services.AddHostedService<DbSeeder>();
 
             var app = builder.Build();
 

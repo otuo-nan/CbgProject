@@ -1,5 +1,10 @@
 ﻿namespace CbgTaxi24.API.Models
 {
+    public enum TripStatus : byte
+    {
+        Active = 1, Completed = 2
+    }
+
     public class Trip
     {
         public Guid TripId { get; set; }
@@ -10,6 +15,7 @@
         public decimal ToLong { get; set; }
 
         public decimal Price { get; set; }
+        public TripStatus Status { get; set; }
 
         //rel
         public Guid RiderId { get; set; }

@@ -13,7 +13,7 @@ Accept: application/json
 
 //rider related
 ###
-GET {{HostAddress}}/api/riders/closest-drivers?riderLocLatitude=5.662276533292582&riderLocLongitude=-0.20558562416544685&nClosestDrivers=3
+GET {{HostAddress}}/api/riders/closest-drivers?riderLocLatitude=5.662276533292582&riderLocLongitude=-0.20558562416544685&nClosestDrivers=5
 Accept: application/json
 
 ###

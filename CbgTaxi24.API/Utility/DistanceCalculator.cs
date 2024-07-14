@@ -2,7 +2,7 @@
 {
     public class DistanceCalculator
     {
-        private double GetDistance(double latitude, double longitude, double otherLatitude, double otherLongitude)
+        public static double GetDistance(double latitude, double longitude, double otherLatitude, double otherLongitude)
         {
             var d1 = latitude * (Math.PI / 180.0);
             var num1 = longitude * (Math.PI / 180.0);

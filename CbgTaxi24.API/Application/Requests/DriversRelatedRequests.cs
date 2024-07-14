@@ -1,6 +1,4 @@
-﻿using CbgTaxi24.API.Application.Queries.Dtos;
-
-#nullable disable
+﻿#nullable disable
 namespace CbgTaxi24.API.Application.Requests
 {
     public class DriversPageRequest : PageRequest
@@ -11,8 +9,8 @@ namespace CbgTaxi24.API.Application.Requests
 
     public class DriversWithinSpecificLocationPageRequest : PageRequest
     {
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public float MaxRangeFromLocationInKm { get; set; }
         public FilterDriversBy? FilterBy { get; set; }
         public string FilterByValue { get; set; }

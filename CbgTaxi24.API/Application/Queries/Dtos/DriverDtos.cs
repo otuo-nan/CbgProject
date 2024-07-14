@@ -32,15 +32,15 @@ namespace CbgTaxi24.API.Application.Queries.Dtos
         public ServiceType ServiceType { get; set; }
         public DriverStatus Status { get; set; }
         public byte Rating { get; set; }
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         //public string Region { get; set; }
         public string LocationName { get; set; }
     }
 
     public class DriversFromALocationDto : DriverDto2
     {
-        public decimal Distance { get; set; }
+        public double Distance { get; set; }
     }
 
     public class DriversPagingOptions : PagingOptions
@@ -83,8 +83,8 @@ namespace CbgTaxi24.API.Application.Queries.Dtos
             }
         }
 
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public float MaxRangeFromLocationInKm { get; set; }
         public FilterDriversBy? FilterBy { get; set; }
 

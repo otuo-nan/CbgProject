@@ -1,9 +1,4 @@
-﻿using CbgTaxi24.API.Application.Queries;
-using CbgTaxi24.API.Application.Queries.Dtos;
-using CbgTaxi24.API.Application.Requests;
-using CbgTaxi24.API.Data;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
+﻿using CbgTaxi24.API.Application.Requests;
 
 namespace CbgTaxi24.API.Controllers
 {
@@ -12,12 +7,10 @@ namespace CbgTaxi24.API.Controllers
     public class DriversController : ControllerBase
     {
         readonly DriverQueries _driverQueries;
-        private readonly AppDbContext context;
 
-        public DriversController(DriverQueries driverQueries, AppDbContext context)
+        public DriversController(DriverQueries driverQueries)
         {
             _driverQueries = driverQueries;
-            this.context = context;
         }
 
         //get driver by id

@@ -51,7 +51,7 @@ namespace CbgTaxi24.API.Application.Queries
             return MapDrivers(result);
         }
 
-        public async Task<int> GetCountDriversWithinSpecificLocationAsync(decimal locLatitude, decimal locLongitude, float maxRangeFromLocation, 
+        public async Task<int> GetCountDriversWithinSpecificLocationAsync(double locLatitude, double locLongitude, float maxRangeFromLocation, 
             FilterDriversBy? filterBy, string? filterByValue)
         {
             using var connection = new SqlConnection(_connectionString);
@@ -65,7 +65,7 @@ namespace CbgTaxi24.API.Application.Queries
                         WHERE Distance < @maxRangeFromLocation", new { locLatitude, locLongitude, maxRangeFromLocation});
         }
 
-        public async Task<List<DriversFromALocationDto>> GetDriversWithinSpecificLocationAsync(decimal locLatitude, decimal locLongitude, float maxRangeFromLocation,
+        public async Task<List<DriversFromALocationDto>> GetDriversWithinSpecificLocationAsync(double locLatitude, double locLongitude, float maxRangeFromLocation,
             int skip, int pageSize, string? orderBy, string orderDirection, 
             FilterDriversBy? filterBy, string? filterByValue)
         {
@@ -89,6 +89,21 @@ namespace CbgTaxi24.API.Application.Queries
                 return [];
 
             return result.AsList();
+        } 
+        
+        public async Task<DriversFromALocationDto?> GetClosestDriverAsync(double locLatitude, double locLongitude)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            var result = await connection.QueryFirstOrDefaultAsync<DriversFromALocationDto>(
+                  @$"Select TOP(1) d.DriverId, d.Name, d.Phone, d.CarNumber, d.ServiceType, d.Status, d.Rating, l.Latitude, l.Longitude, l.Region, l.Name AS LocationName,
+                        ROUND(dbo.CalculateDistance(@locLatitude, @locLongitude, l.Latitude, l.Longitude), 2) AS Distance
+	                    FROM Drivers d JOIN Locations l
+	                    ON d.LocationId = l.LocationId WHERE Status = 1
+                        ORDER BY Distance", new { locLatitude, locLongitude }) ?? default;
+
+            return result;
         }
 
         static string GetSqlFilterComponent(FilterDriversBy? filterBy, string? filterByValue)

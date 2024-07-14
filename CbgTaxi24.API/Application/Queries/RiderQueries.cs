@@ -13,7 +13,7 @@ namespace CbgTaxi24.API.Application.Queries
     {
         readonly string _connectionString = !string.IsNullOrWhiteSpace(constr) ? constr : throw new ArgumentNullException(nameof(constr));
 
-        public async Task<IEnumerable<DriversFromALocationDto>> GetClosestDriversAsync(decimal riderLocLatitude, decimal riderLocLongitude, int nClosestDrivers)
+        public async Task<IEnumerable<DriversFromALocationDto>> GetClosestDriversAsync(double riderLocLatitude, double riderLocLongitude, int nClosestDrivers)
         {
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
