@@ -21,7 +21,7 @@ namespace CbgTaxi24.API.Application.Queries
                   @$"Select TOP(@nClosestDrivers) d.DriverId, d.Name, d.Phone, d.CarNumber, d.ServiceType, d.Status, d.Rating, l.Latitude, l.Longitude, l.Region, l.Name AS LocationName,
                         ROUND(dbo.CalculateDistance(@riderLocLatitude, @riderLocLongitude, l.Latitude, l.Longitude), 2) AS Distance
 	                    FROM Drivers d JOIN Locations l
-	                    ON d.LocationId = l.LocationId 
+	                    ON d.LocationId = l.LocationId WHERE Status = 1
                         ORDER BY Distance", new { riderLocLatitude, riderLocLongitude, nClosestDrivers }
                 );
 

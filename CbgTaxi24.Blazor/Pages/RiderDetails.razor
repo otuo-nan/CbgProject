@@ -1,0 +1,108 @@
+﻿@page "/rider-details/{id}"
+@using CbgTaxi24.Blazor.Components.Rider
+@using CbgTaxi24.Blazor.Services
+
+@if (rider == null && isProcessing)
+{
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-body" style="height: 850px">
+            <div>
+                <h3>Rider details</h3>
+            </div>
+            <hr />
+            <div class="d-flex flex-row">
+                <div  class="details_list" style="width: 250px; margin-right: 60px">
+                    <div>
+                        <h4>Name</h4>
+                        <p>@rider.Name</p>
+                    </div>
+                    <hr />
+                    <div>
+                        <h4>Location</h4>
+                        <p>@rider.LocationName</p>
+                    </div>
+                    <div>
+                        <h4>Latitude</h4>
+                        <p>@rider.Latitude</p>
+                    </div>
+                    <div>
+                        <h4>Longitude</h4>
+                        <p>@rider.Longitude</p>
+                    </div>
+                </div>
+
+                @if (!rider.IsInTrip)
+                {
+                    <div>
+                        <div>
+                            <div class="location_form">
+                                <EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+                                    <DataAnnotationsValidator />
+                                    <div class="form-group row">
+                                        <label class="col-sm-6 col-form-label required">
+                                            Latitude
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <InputNumber class="form-control" @bind-Value="model.Latitude" />
+                                            <ValidationMessage For="@(() => model.Latitude)" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                        <label class="col-sm-6 col-form-label required">
+                                            Longitude
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <InputNumber class="form-control" @bind-Value="model.Longitude" />
+                                            <ValidationMessage For="@(() => model.Longitude)" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-3">
+                                        <label class="col-sm-6 col-form-label required">
+                                            Destination Name
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <InputText class="form-control" @bind-Value="model.DestinationName" />
+                                            <ValidationMessage For="@(() => model.DestinationName)" />
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary @GetRequestingTripButtonStatus()" type="submit">Request a ride</button>
+                                    </div>
+                                </EditForm>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <div style="width: 900px">
+                            <h1>Closest drivers</h1><small>less than 3km away</small>
+                            @if (closestDrivers == null && isProcessing)
+                            {
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            }
+                            else if (closestDrivers == null && !isProcessing)
+                            {
+                                <h4>No drivers available</h4>
+                            }
+                            else
+                            {
+                                <ClosestDrivers closestDrivers="closestDrivers"></ClosestDrivers>
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <RiderTripDetails Trip="riderTrip"></RiderTripDetails>
+                }            
+            </div>
+        </div>
+    </div>
+}

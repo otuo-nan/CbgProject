@@ -48,9 +48,24 @@ namespace CbgTaxi24.API.Application.Services
                                         LastName = r.LastName,
                                         Latitude = (double)r.Location.Latitude,
                                         Longitude = (double)r.Location.Longitude,
-                                        LocationName = r.Location.Name
+                                        LocationName = r.Location.Name,
+                                        IsInTrip= r.IsInTrip
                                     })
                                     .FirstOrDefaultAsync() ?? throw new PlatformException("not found");
+        }
+
+        public async Task<TripDto2?> GetRiderActiveTripAsync(Guid id)
+        {
+            var trip = await _dbContext.Trips.Include(t => t.Driver)
+                                    .Include(t => t.Rider)
+                                    .FirstOrDefaultAsync(t => t.Status == Models.TripStatus.Active && t.RiderId == id);
+
+            if (trip != null)
+            {
+                return TripDto2.MapTrip(trip);
+            }
+
+            throw new PlatformException("no active trip found");
         }
     }
 }

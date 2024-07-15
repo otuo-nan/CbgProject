@@ -49,7 +49,7 @@ namespace CbgTaxi24.API.Controllers
 
             return Ok(new PaginatedEntities<DriversWithinSpecificLocationPagingOptions, DriversFromALocationDto>
             {
-                Data = await driverQueries.GetDriversWithinSpecificLocationAsync(request.Latitude, request.Longitude, request.MaxRangeFromLocationInKm,
+                Data = await driverQueries.GetDriversWithinSpecificRangeOfLocationAsync(request.Latitude, request.Longitude, request.MaxRangeFromLocationInKm,
                                                 options.PageNum - 1, options.PageSize, 
                                                 options.SortField, options.SortDirection, options.FilterBy, options.FilterByValue),
                 PagingOptions = options

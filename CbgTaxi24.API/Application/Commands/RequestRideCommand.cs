@@ -38,8 +38,12 @@ namespace CbgTaxi24.API.Application.Commands
         {
             var driver = await _driverQueries.GetClosestDriverAsync(request.CurrentLatitude, request.CurrentLongitude) ?? throw new PlatformException("no drivers available");
 
-            if (await _dbContext.Riders.AnyAsync(r => r.RiderId == request.RiderId, cancellationToken: cancellationToken))
+            var rider = await _dbContext.Riders.FirstOrDefaultAsync(r => r.RiderId == request.RiderId, cancellationToken: cancellationToken);
+
+            if (rider != null)
             {
+                rider.IsInTrip = true;
+
                 var trip = new Trip
                 {
                     FromLat = (decimal)request.CurrentLatitude,
@@ -50,7 +54,7 @@ namespace CbgTaxi24.API.Application.Commands
                     Status = TripStatus.Active,
                     Price = (decimal)TripPriceCalculator.GetPrice(request.Distance),
                     RiderId = request.RiderId,
-                    DriverId = driver.DriverId
+                    DriverId = driver.DriverId,
                 };
 
                 await _dbContext.Trips.AddAsync(trip, cancellationToken);

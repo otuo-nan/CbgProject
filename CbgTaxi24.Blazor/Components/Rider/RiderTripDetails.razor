@@ -1,0 +1,66 @@
+﻿@using CbgTaxi24.Blazor.Dtos
+
+@if (Trip == null)
+{
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
+else
+{
+    <div>
+        <h1>Trip details</h1>
+        <div class="details_list">
+            <h3>Destination</h3>
+            <hr />
+            <div>
+                <h4>Location</h4>
+                <p>@tripMetaData.ToLocation.Name</p>
+            </div>
+            <div>
+                <h4>Latitude</h4>
+                <p>@tripMetaData.ToLocation.Latitude</p>
+            </div>
+            <div>
+                <h4>Longitude</h4>
+                <p>@tripMetaData.ToLocation.Longitude</p>
+            </div>
+        </div>
+        <hr />
+        <div class="details_list mb-4">
+            <h3>Driver</h3>
+            <div>
+                <h4>Name</h4>
+                <p>@Trip.Driver.Name</p>
+            </div>
+            <div>
+                <h4>Phone</h4>
+                <p>@Trip.Driver.Phone</p>
+            </div>
+            <div>
+                <h4>Licence Plate</h4>
+                <p>@Trip.Driver.CarNumber</p>
+            </div>
+            <div>
+                <h4>Service</h4>
+                <p class="@DriverService.GetServiceTypeCss(Trip.Driver.ServiceType)">@Trip.Driver.ServiceType</p>
+            </div>
+        </div>
+
+        <h2 class="text-success">On you way to your destination</h2>
+    </div>
+
+}
+
+@code {
+    #nullable disable
+    [Parameter]
+    public TripDto2 Trip { get; set; }
+
+    TripMetaData tripMetaData;
+
+    protected override void OnParametersSet()
+    {
+        tripMetaData = Trip?.GetTripMetaData();
+    }
+}

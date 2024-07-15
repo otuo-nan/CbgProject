@@ -17,6 +17,7 @@ namespace CbgTaxi24.API.Application.Services
             try
             {
                 trip.Status = TripStatus.Completed;
+                trip.Rider.IsInTrip = false;
 
                 var invoice = new Invoice
                 {

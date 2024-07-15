@@ -50,7 +50,9 @@ namespace CbgTaxi24.Blazor.Services
         public async Task<PagedData<DriversFromALocationDto>?> GetDriversWithinSpecificLocationAsync(double locLatitude, double locLongitude,
             double maxRangeFromLocation)
         {
-            var httpParams = $"drivers/from-location?Latitude={locLatitude}&Longitude={locLongitude}&MaxRangeFromLocationInKm={maxRangeFromLocation}&PageNum=1&PageSize=1000";
+            var httpParams = $"drivers/from-location?Latitude={locLatitude}&Longitude={locLongitude}&" +
+                $"MaxRangeFromLocationInKm={maxRangeFromLocation}&PageNum=1&PageSize=1000" +
+                $"&filterBy=DriverStatus&filterByValue=Available";
             try
             {
                 return (await _httpClient.GetFromJsonAsync<PagedData<DriversFromALocationDto>>(httpParams))!;

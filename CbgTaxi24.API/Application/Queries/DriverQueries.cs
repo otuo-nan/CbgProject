@@ -63,7 +63,7 @@ namespace CbgTaxi24.API.Application.Queries
                         WHERE Distance < @maxRangeFromLocation", new { locLatitude, locLongitude, maxRangeFromLocation});
         }
 
-        public async Task<List<DriversFromALocationDto>> GetDriversWithinSpecificLocationAsync(double locLatitude, double locLongitude, float maxRangeFromLocation,
+        public async Task<List<DriversFromALocationDto>> GetDriversWithinSpecificRangeOfLocationAsync(double locLatitude, double locLongitude, float maxRangeFromLocation,
             int skip, int pageSize, string? orderBy, string orderDirection, 
             FilterDriversBy? filterBy, string? filterByValue)
         {

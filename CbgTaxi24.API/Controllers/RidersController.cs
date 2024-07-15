@@ -37,5 +37,12 @@ namespace CbgTaxi24.API.Controllers
         {
             return Ok((await mediator.Send(command)).Entity);
         }
+        
+        [HttpGet("active-trip/{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(TripDto))]
+        public async Task<IActionResult> ActiveTrip(Guid id)
+        {
+            return Ok(await riderService.GetRiderActiveTripAsync(id));
+        }
     }
 }

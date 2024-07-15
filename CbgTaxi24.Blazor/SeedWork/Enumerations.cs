@@ -14,10 +14,16 @@ namespace CbgTaxi24.Blazor.SeedWork
         Available = 1, Unavailable = 2, Suspended = 3
     }
 
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum TripStatus : byte
+    {
+        Active = 1, Completed = 2
+    }
+
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum FilterDriversBy : byte
     {
         ServiceType = 1, DriverStatus = 2,
     }
-
 }

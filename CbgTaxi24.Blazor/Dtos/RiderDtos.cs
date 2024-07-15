@@ -11,6 +11,8 @@ namespace CbgTaxi24.Blazor.Dtos
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string LocationName { get; set; }
+        public bool IsInTrip { get; set; }
+        public string Name => $"{FirstName} {LastName}";
     }
 
     public class TripRiderDto

@@ -121,7 +121,9 @@ label.col-form-label, .form-check-label {
     padding: 10px;
 }
 
-
+.details_list > div {
+    margin-bottom: 5px;
+}
 /*Small devices (landscape phones, 576px and up)
 */
 @media (min-width: 576px) {

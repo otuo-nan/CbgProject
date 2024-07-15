@@ -39,40 +39,8 @@ namespace CbgTaxi24.API.Application.Services
             return new PaginatedEntities<PagingOptions, TripDto2>
             {
                 PagingOptions = options,
-                Data = trips3.Select(t => MapTrip(t))
+                Data = trips3.Select(t => TripDto2.MapTrip(t))
             };
-
-            static TripDto2 MapTrip(Trip t)
-            {
-                return new TripDto2
-                {
-                    TripId = t.TripId,
-                    FromLat = (double)t.FromLat,
-                    FromLong = (double)t.FromLong,
-                    ToLat = (double)t.ToLat,
-                    ToLong = (double)t.ToLong,
-                    Status = t.Status,
-                    RiderId = t.RiderId,
-                    DriverId = t.DriverId,
-                    Driver = new DriverDto
-                    {
-                        DriverId = t.Driver.DriverId,
-                        Name = t.Driver.Name,
-                        Phone = t.Driver.Phone,
-                        CarNumber = t.Driver.CarNumber,
-                        ServiceType = t.Driver.ServiceType,
-                        Status = t.Driver.Status,
-                        Rating = t.Driver.Rating,
-                    },
-                    Rider = new TripRiderDto
-                    {
-                        RiderId = t.Rider.RiderId,
-                        FirstName = t.Rider.FirstName,
-                        LastName = t.Rider.LastName,
-                        OtherNames = t.Rider.OtherNames,
-                    }
-                };
-            }
         }
     }
 }

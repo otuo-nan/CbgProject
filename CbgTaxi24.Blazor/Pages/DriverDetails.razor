@@ -3,10 +3,8 @@
 
 @if (entity == null && isProcessing)
 {
-    <div class="loading-spinner">
-        <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
     </div>
 }
 else
@@ -18,7 +16,7 @@ else
             </div>
             <hr />
             <div class="d-flex flex-row justify-content-around" style="width: 800px">
-                <div>
+                <div class="details_list">
                     <div>
                         <h4>Name</h4>
                         <p>@entity.Name</p>
@@ -40,17 +38,22 @@ else
                         <p class="@DriverService.GetServiceTypeCss(entity.ServiceType)">@entity.ServiceType</p>
                     </div>
                 </div>
-                <div>
+                <div class="details_list">
                     <h1>Recent Location</h1>
-                    <h4>Location</h4>
-                    <p>@entity.LocationName</p>
+                    <div>
+                        <h4>Location</h4>
+                        <p>@entity.LocationName</p>
+                    </div>
+                    <div>
+                        <h4>Latitude</h4>
+                        <p>@entity.Latitude</p>
 
-                    <h4>Latitude</h4>
-                    <p>@entity.Latitude</p>
+                    </div>
+                    <div>
 
-                    <h4>Longitude</h4>
-                    <p>@entity.Longitude</p>
-               
+                        <h4>Longitude</h4>
+                        <p>@entity.Longitude</p>
+                    </div>
                 </div>
             </div>
         </div>
