@@ -1,0 +1,95 @@
+﻿.print_container {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 0px;
+}
+
+.top_section {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.middle_section {
+    margin-bottom: 25px
+}
+
+.company_and_billing_info {
+    width: 70%;
+}
+
+    .company_and_billing_info div:first-child {
+        margin-bottom: 10px;
+    }
+
+.invoice_info {
+    width: 30%
+}
+
+    .invoice_info > div p {
+        display: flex;
+        justify-content: space-between;
+    }
+
+table {
+    width: inherit;
+}
+
+    table th {
+        padding-left: 5px
+    }
+
+        table th:first-child {
+            width: 55%;
+        }
+
+        table th:nth-child(2) {
+            width: 10%;
+        }
+
+thead {
+    background-color: #e3e3e3c2;
+}
+
+th {
+    border: 0.5px solid;
+}
+
+.bottom_section > div:first-child {
+    width: 100%
+}
+
+tbody {
+    height: 65vh;
+}
+
+.summary {
+    border: 1px solid
+}
+
+.row_with_data {
+    height: 30.47px
+}
+
+    .row_with_data td {
+        border: 0.5px solid;
+        padding-left: 5px;
+    }
+
+.row_without_data td {
+    border: 0.5px solid
+}
+
+.summary > td:first-child {
+    border-right: 0.5px solid;
+}
+
+.summary > td:first-child {
+    padding-left: 5px;
+}
+
+.summary > td:last-child p {
+    display: flex;
+    justify-content: space-between;
+}
