@@ -1,0 +1,95 @@
+﻿@using CbgTaxi24.Blazor.Services
+
+<div class="card">
+    <div class="card-body" style="height: 700px">
+
+        <div class="location_form">
+            <EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <div class="form-group row">
+                    <label class="col-sm-12 col-form-label required">
+                        Distance from location
+                    </label>
+                    <div class="col-sm-12">
+                        <InputNumber class="form-control" @bind-Value="model.WithinDistance" />
+                        <ValidationMessage For="@(() => model.WithinDistance)" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6 col-form-label required">
+                        Latitude
+                    </label>
+                    <div class="col-sm-12">
+                        <InputNumber class="form-control" @bind-Value="model.Latitude" />
+                        <ValidationMessage For="@(() => model.Latitude)" />
+                    </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label class="col-sm-6 col-form-label required">
+                        Longitude
+                    </label>
+                    <div class="col-sm-12">
+                        <InputNumber class="form-control" @bind-Value="model.Longitude" />
+                        <ValidationMessage For="@(() => model.Longitude)" />
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </EditForm>
+        </div>
+
+        <hr />
+        <div>
+            <h3>Available drivers</h3>
+
+            @if (listEntities == null && isProcessing)
+            {
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            }
+            else if (listEntities == null && !isProcessing)
+            {
+                <h4>No drivers available</h4>
+            }
+            else
+            {
+                <div>
+                    <div class="list-table">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr class="list-heading">
+                                    <th> DriverId </th>
+                                    <th> Name </th>
+                                    <th> Phone</th>
+                                    <th> Licence plate</th>
+                                    <th> Status </th>
+                                    <th> Service Type </th>
+                                    <th> Rating </th>
+                                    <th> Location </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in listEntities!)
+                                {
+                                    <tr class="list_row">
+                                        <td>@item.DriverId</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Phone</td>
+                                        <td>ghc @item.CarNumber</td>
+                                        <td class="@DriverService.GetDriverStatusCss(item.Status)">@item.Status.ToString()</td>
+                                        <td class="@DriverService.GetServiceTypeCss(item.ServiceType)">@item.ServiceType.ToString()</td>
+                                        <td>@item.Rating</td>
+                                        <td>@item.LocationName</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

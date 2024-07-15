@@ -1,5 +1,17 @@
-﻿<h3>Drivers</h3>
+﻿@page "/"
+@using CbgTaxi24.Blazor.Components.Drivers
+@using CbgTaxi24.Blazor.Components.Shared
 
-@code {
 
-}
+<div class="card">
+    <div class="card-body">
+        <TabControl>
+            <TabPage Text="All drivers">
+                <AllDrivers></AllDrivers>
+            </TabPage>
+            <TabPage Text="Drivers from Location">
+                <DriversFromLocation></DriversFromLocation>
+            </TabPage>
+        </TabControl>
+    </div>
+</div>

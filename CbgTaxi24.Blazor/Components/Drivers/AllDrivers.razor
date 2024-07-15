@@ -1,0 +1,97 @@
+﻿@using CbgTaxi24.Blazor.Components.Shared
+@using CbgTaxi24.Blazor.Services
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-2">
+            <div>
+                <h3>Drivers</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mb-3 @searchWidth">
+                <input autocomplete="off" name="Search" type="text" class="form-control f-sz-1-em" placeholder="Search..."
+                       @bind="@SearchQuery" @bind:event="oninput">
+            </div>
+            <div class="@filterWidth">
+                <select @onchange="FilterSelected" class="form-select">
+                    <option value="@DriverListFilterBy.None" selected>No Filter</option>
+                    <option value="@DriverListFilterBy.DriverStatus">Status</option>
+                    <option value="@DriverListFilterBy.ServiceType">Service</option>
+                </select>
+            </div>
+            <div class="@filterValueWidth">
+                <select @onchange="StatusSelected" class="form-select">
+                    @foreach (var item in filterValuesDropdown)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div>
+            <div class="list-table">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr class="list-heading">
+                            <th @onclick="@(() => Sort("DriverId"))">
+                                DriverId <fa-icon class="@SortIndicator("DriverId")"></fa-icon>
+                            </th>
+                            <th @onclick="@(() =>Sort("Name"))">
+                                Name<fa-icon class="@SortIndicator("Name")"></fa-icon>
+                            </th>
+                            <th @onclick="@(() =>Sort("Phone"))">
+                                Phone<fa-icon class="@SortIndicator("Phone")"></fa-icon>
+                            </th>
+                            <th @onclick="@(() =>Sort("CarNumber"))">
+                                Licence plate <fa-icon class="@SortIndicator("CarNumber")"></fa-icon>
+                            </th>
+                            <th @onclick="@(() => Sort("Status"))">
+                                Status <fa-icon class="@SortIndicator("Status")"></fa-icon>
+                            </th>
+                            <th @onclick="@(() => Sort("ServiceType"))">
+                                Service Type <fa-icon class="@SortIndicator("ServiceType")"></fa-icon>
+                            </th>
+                            <th @onclick="@(() => Sort("Rating"))">
+                                Rating <fa-icon class="@SortIndicator("Rating")"></fa-icon>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (listEntities == null && _isProcessing)
+                        {
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        }
+                        else if (listEntities == null && !_isProcessing)
+                        {
+                            <h4>No data available</h4>
+                        }
+                        else
+                        {
+                            @foreach (var item in listEntities!)
+                            {
+                                <tr class="list_row" @ondblclick="() => ListRow_DbClicked(item)">
+                                    <td>@item.DriverId</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Phone</td>
+                                    <td>ghc @item.CarNumber</td>
+                                    <td class="@DriverService.GetDriverStatusCss(item.Status)">@item.Status.ToString()</td>
+                                    <td class="@DriverService.GetServiceTypeCss(item.ServiceType)">@item.ServiceType.ToString()</td>
+                                    <td>@item.Rating</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between">
+            <div>
+                <span>Count: @pageMetaData.TotalCount</span>
+            </div>
+            <Pagination Spread=3 MetaData="pageMetaData" SelectedPage="SelectedPage_Callback"></Pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Components
+
+<CascadingValue Value="this" Name="tabControl">
+    <div role="group" class="mb-4">
+        <ul class="nav nav-tabs">
+            @foreach (TabPage tabPage in Pages)
+            {
+                <li class="nav-item my_nav_item">
+                    <a class="nav-link @GetButtonClass(tabPage)" @onclick=@(() => ActivatePage(tabPage))>
+                        @tabPage.Text
+                    </a>
+                </li>
+            }
+        </ul>  
+    </div>
+
+    @ChildContent
+</CascadingValue>
+
+
+@code {
+    public TabPage ActivePage { get; set; }
+
+    List<TabPage> Pages = new List<TabPage>();
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    internal void AddPage(TabPage tabPage)
+    {
+        Pages.Add(tabPage);
+
+        if (Pages.Count == 1)
+        {
+            ActivePage = tabPage;
+        }
+        StateHasChanged();
+    }
+
+    string GetButtonClass(TabPage page)
+    {
+        return page == ActivePage ? "active" : string.Empty;
+    }
+
+    void ActivatePage(TabPage page)
+    {
+        ActivePage = page;
+    }
+}

@@ -28,18 +28,19 @@ body {
     font-family: "Poppins";
 }
 
-p{
+p {
     margin: 0;
 }
 
 .bi {
     font-size: 20px;
 }
-.bi-trash3{
+
+.bi-trash3 {
     color: red;
 }
 
-.row_action:hover{
+.row_action:hover {
     background-color: white;
 }
 
@@ -88,12 +89,12 @@ label.col-form-label, .form-check-label {
     font-size: 18px;
 }
 
-.nav-item:hover{
+.nav-item:hover {
     cursor: pointer;
 }
 
 .nav-tabs {
-    border-radius : 1px !important;
+    border-radius: 1px !important;
 }
 
 .my_nav_item a {
@@ -103,30 +104,28 @@ label.col-form-label, .form-check-label {
     padding-top: 5px
 }
 
-    .my_nav_item a.active{
+    .my_nav_item a.active {
         background-color: white !important;
         color: black;
     }
 
-
-.order_report > div:first-child {
-    width: 30%;
+.required:after {
+    content: " *";
+    color: red;
 }
 
-.order_report > div:last-child {
-    width: 50%;
+/*UI*/
+.location_form {
+    width: 400px;
+    border: 1px solid rgba(0,0,0,.125);
+    padding: 10px;
 }
 
-    .order_report > div:last-child p {
-        display: flex;
-        justify-content: space-between;
-        font-size: 30px;
-    }
 
-    /*Small devices (landscape phones, 576px and up)
+/*Small devices (landscape phones, 576px and up)
 */
-    @media (min-width: 576px) {
-    }
+@media (min-width: 576px) {
+}
 
 /*Medium devices (tablets, 768px and up)
 */
@@ -147,6 +146,7 @@ label.col-form-label, .form-check-label {
 */
 @media (min-width: 1400px) {
     .table {
-/*        width: 120%;
-*/    }
+        /*        width: 120%;
+*/
+    }
 }

@@ -1,0 +1,58 @@
+﻿@page "/driver-details/{id}"
+@using CbgTaxi24.Blazor.Services
+
+@if (entity == null && isProcessing)
+{
+    <div class="loading-spinner">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+}
+else
+{
+    <div class="card" style="width: 900px; height: 500px;">
+        <div class="card-body">
+            <div>
+                <h3>Driver details</h3>
+            </div>
+            <hr />
+            <div class="d-flex flex-row justify-content-around" style="width: 800px">
+                <div>
+                    <div>
+                        <h4>Name</h4>
+                        <p>@entity.Name</p>
+                    </div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>@entity.Phone</p>
+                    </div>
+                    <div>
+                        <h4>Licence Plate</h4>
+                        <p>@entity.CarNumber</p>
+                    </div>
+                    <div>
+                        <h4>Status</h4>
+                        <p class="@DriverService.GetDriverStatusCss(@entity.Status)">@entity.Status</p>
+                    </div>
+                    <div>
+                        <h4>Service</h4>
+                        <p class="@DriverService.GetServiceTypeCss(entity.ServiceType)">@entity.ServiceType</p>
+                    </div>
+                </div>
+                <div>
+                    <h1>Recent Location</h1>
+                    <h4>Location</h4>
+                    <p>@entity.LocationName</p>
+
+                    <h4>Latitude</h4>
+                    <p>@entity.Latitude</p>
+
+                    <h4>Longitude</h4>
+                    <p>@entity.Longitude</p>
+               
+                </div>
+            </div>
+        </div>
+    </div>
+}
