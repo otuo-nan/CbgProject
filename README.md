@@ -8,7 +8,7 @@ This project contains the following applications
 To make it easier to start project, a docker compose configuration is in the root folder of the project solution
 
 **Requirements** 
--  [Docker Desktop](https://www.docker.com/products/docker-desktop/) <sup(optional)</sup>
+-  [Docker Desktop](https://www.docker.com/products/docker-desktop/) <sup>optional</sup>
 - [Microsoft Sql Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) *
 - [Visual Studio](https://visualstudio.microsoft.com/downloads/)/ [VSCode](https://code.visualstudio.com/download) *
 - [.Net 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) *
@@ -26,6 +26,9 @@ Project can be run by:
    - Navigate to the root folder of CbgTaxi24.API and/or CbgTaxi24.Blazor then run the command `dotnet run -v q`
    - API swagger can be located at http://localhost:5081/swagger/index.html
    - Blazor app can be located at http://localhost:5207
+
+> [!IMPORTANT]
+> uncomment **DefaultConnection** for **SQL Server** and comment out the other(meant for docker SQL Server) in the appsettings.Development.json file found in the root of CbgTaxi24.API folder.
    
 ## Usage
 To make request to API endpoints you can make use of the **CbgTaxi24.API.http** file found in the root of **CbgTaxi24.API** project folder (NB: code editor required)
