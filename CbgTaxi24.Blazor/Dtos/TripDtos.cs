@@ -19,14 +19,25 @@ namespace CbgTaxi24.Blazor.Dtos
         public Guid RiderId { get; set; }
         public Guid DriverId { get; set; }
 
-        public TripMetaData GetTripMetaData()
-        {
-            if (!string.IsNullOrEmpty(Metadata))
-            {
-                return JsonSerializer.Deserialize<TripMetaData>(Metadata);
-            }
+        private TripMetaData _tripMetadata = null;
 
-            return default!;
+        public TripMetaData TripMetaData
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Metadata))
+                {
+                    if (_tripMetadata == null)
+                    {
+                        _tripMetadata = JsonSerializer.Deserialize<TripMetaData>(Metadata);
+
+                        return _tripMetadata;
+                    }
+                    return _tripMetadata;
+                }
+
+                return default!;
+            }
         }
     }
 

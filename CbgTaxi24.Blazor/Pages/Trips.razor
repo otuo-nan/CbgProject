@@ -1,13 +1,11 @@
-﻿@page "/"
-
+﻿@page "/trips"
 @using CbgTaxi24.Blazor.Components.Shared
-@using CbgTaxi24.Blazor.Services
 
 <div class="card">
     <div class="card-body">
         <div class="d-flex justify-content-between mb-2">
             <div>
-                <h3>Riders</h3>
+                <h3>Trips</h3>
             </div>
         </div>
         <div class="row">
@@ -21,18 +19,12 @@
                 <table class="table">
                     <thead class="thead-light">
                         <tr class="list-heading">
-                            <th @onclick="@(() => Sort("RiderId"))">
-                                RiderId <fa-icon class="@SortIndicator("RiderId")"></fa-icon>
-                            </th>
-                            <th @onclick="@(() =>Sort("Name"))">
-                                Name<fa-icon class="@SortIndicator("Name")"></fa-icon>
-                            </th>
-                            <th @onclick="@(() => Sort("Status"))">
-                                Status <fa-icon class="@SortIndicator("Status")"></fa-icon>
-                            </th>
-                            <th @onclick="@(() => Sort("Location"))">
-                                Location <fa-icon class="@SortIndicator("Location")"></fa-icon>
-                            </th>
+                            <th> TripId </th>
+                            <th> Rider</th>
+                            <th> Driver</th>
+                            <th> From </th>
+                            <th> To </th>
+                            <th> Status </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,11 +42,13 @@
                         {
                             @foreach (var item in listEntities!)
                             {
-                                <tr class="list_row" @ondblclick="() => ListRow_DbClicked(item)">
-                                    <td>@item.RiderId</td>
-                                    <td>@item.Name</td>
-                                    <td class="@GetTripStatusCss(item)">@(item.IsInTrip ? "In trip" : "Not in trip")</td>
-                                    <td>@item.LocationName</td>
+                                <tr class="list_row">
+                                    <td>@item.TripId</td>
+                                    <td>@item.Rider.Name</td>
+                                    <td>@item.Driver.Name</td>
+                                    <td>@GetFromLocation(item.TripMetaData)</td>
+                                    <td>@GetDestiantion(item.TripMetaData)</td>
+                                    <td class="@GetTripStatusCss(item)">@item.Status</td>
                                 </tr>
                             }
                         }

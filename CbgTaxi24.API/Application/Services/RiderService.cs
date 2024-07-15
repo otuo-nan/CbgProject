@@ -23,7 +23,8 @@ namespace CbgTaxi24.API.Application.Services
                                              LastName = r.LastName,
                                              Latitude = (double)r.Location.Latitude,
                                              Longitude = (double)r.Location.Longitude,
-                                             LocationName = r.Location.Name
+                                             LocationName = r.Location.Name,
+                                             IsInTrip = r.IsInTrip
                                          })
                                          .ToListAsync();
 
@@ -39,19 +40,19 @@ namespace CbgTaxi24.API.Application.Services
 
         public async Task<RiderDto> GetRiderAsync(Guid id)
         {
-           return await _dbContext.Riders.Include(r => r.Location)
-                                    .Where(r => r.RiderId == id)
-                                    .Select(r => new RiderDto
-                                    {
-                                        RiderId = r.RiderId,
-                                        FirstName = r.FirstName,
-                                        LastName = r.LastName,
-                                        Latitude = (double)r.Location.Latitude,
-                                        Longitude = (double)r.Location.Longitude,
-                                        LocationName = r.Location.Name,
-                                        IsInTrip= r.IsInTrip
-                                    })
-                                    .FirstOrDefaultAsync() ?? throw new PlatformException("not found");
+            return await _dbContext.Riders.Include(r => r.Location)
+                                     .Where(r => r.RiderId == id)
+                                     .Select(r => new RiderDto
+                                     {
+                                         RiderId = r.RiderId,
+                                         FirstName = r.FirstName,
+                                         LastName = r.LastName,
+                                         Latitude = (double)r.Location.Latitude,
+                                         Longitude = (double)r.Location.Longitude,
+                                         LocationName = r.Location.Name,
+                                         IsInTrip = r.IsInTrip
+                                     })
+                                     .FirstOrDefaultAsync() ?? throw new PlatformException("not found");
         }
 
         public async Task<TripDto2?> GetRiderActiveTripAsync(Guid id)

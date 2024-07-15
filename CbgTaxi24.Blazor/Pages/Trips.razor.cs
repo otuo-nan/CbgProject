@@ -1,16 +1,14 @@
-﻿using CbgTaxi24.Blazor.Components.Drivers;
-using CbgTaxi24.Blazor.Dtos;
+﻿using CbgTaxi24.Blazor.Dtos;
 using CbgTaxi24.Blazor.SeedWork;
-using CbgTaxi24.Blazor.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 
 namespace CbgTaxi24.Blazor.Pages
 {
-    public partial class Riders
+    public partial class Trips
     {
         #region fields
-        IEnumerable<RiderDto> listEntities = default!;
+        IEnumerable<TripDto2> listEntities = default!;
         bool _isProcessing;
 
         [Inject]
@@ -24,7 +22,7 @@ namespace CbgTaxi24.Blazor.Pages
 
 
         [Inject]
-        public RiderService Service { get; set; }
+        public BackOfficeService Service { get; set; }
 
         PagingOptions pagingOptions = new()
         {
@@ -82,7 +80,7 @@ namespace CbgTaxi24.Blazor.Pages
         {
             _isProcessing = true;
 
-            PagedData<RiderDto>? paged = await Service.GetRidersAsync(pageMetaData.CurrentPage, pageMetaData.PageSize);
+            PagedData<TripDto2>? paged = await Service.GetAllTripsAsync(pageMetaData.CurrentPage, pageMetaData.PageSize);
 
             if (paged != null)
             {
@@ -96,47 +94,31 @@ namespace CbgTaxi24.Blazor.Pages
             _isProcessing = false;
         }
 
-        void ListRow_DbClicked(RiderDto dto)
+        static string GetTripStatusCss(TripDto2 trip)
         {
-            NavigationManager.NavigateTo($"rider-details/{dto.RiderId}");
+            return trip.Status switch
+            {
+                TripStatus.Active => "text-success",
+                TripStatus.Completed => "text-primary",
+                _ => throw new ArgumentException("invalid trip status"),
+            };
         }
 
-        string GetTripStatusCss(RiderDto dto)
+        static string GetFromLocation(TripMetaData meta)
         {
-            return dto.IsInTrip ? "text-success" : "text-info";
+            return string.IsNullOrEmpty(meta.FromLocation.Name) ? $"Lat: {meta.FromLocation.Latitude}, Long: {meta.FromLocation.Longitude}" : meta.FromLocation.Name;
         }
+        
+        static string GetDestiantion(TripMetaData meta)
+        {
+            return string.IsNullOrEmpty(meta.ToLocation.Name) ? $"Lat: {meta.ToLocation.Latitude}, Long: {meta.ToLocation.Longitude}" : meta.ToLocation.Name;
+        }
+
         #region Paging
-        async Task Sort(string sortField)
-        {
-            if (sortField.Equals(pagingOptions.CurrentSortField))
-            {
-                pagingOptions.CurrentSortDirection =
-                    pagingOptions.CurrentSortDirection.Equals("Asc") ? "Desc" : "Asc";
-            }
-            else
-            {
-                pagingOptions.CurrentSortField = sortField;
-                pagingOptions.CurrentSortDirection = "Asc";
-            }
-
-            await GetEntitiesAsync();
-        }
-
-        string SortIndicator(string sortField)
-        {
-            if (sortField.Equals(pagingOptions.CurrentSortField))
-            {
-                return pagingOptions.CurrentSortDirection.Equals("Asc") ? "fas fa-sort-down" : "fas fa-sort-up";
-            }
-
-            return "fas fa-sort-down";
-        }
-
         protected async Task SelectedPage_Callback()
         {
             await GetEntitiesAsync();
         }
         #endregion
     }
-
 }
