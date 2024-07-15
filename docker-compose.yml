@@ -17,6 +17,7 @@ services:
       context: .
       dockerfile: CbgTaxi24.API/Dockerfile
     environment:
+      - ConnectionStrings__DefaultConnection=Server=sqldata;Database=CbgTaxi24.db;User Id=sa;Password=Pass@word;Encrypt=false
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
