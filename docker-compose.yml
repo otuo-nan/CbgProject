@@ -32,6 +32,7 @@ services:
       context: .
       dockerfile: CbgTaxi24.Blazor/Dockerfile
     environment:
+      - APIEndpointBaseUrl= http://host.docker.internal:5134/api/
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "5135:80"
