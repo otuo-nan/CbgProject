@@ -1,6 +1,7 @@
 ﻿using CbgTaxi24.Blazor.Components.Drivers;
 using CbgTaxi24.Blazor.Dtos;
 using CbgTaxi24.Blazor.SeedWork;
+using System.Text.Json;
 
 namespace CbgTaxi24.Blazor.Services
 {
@@ -68,11 +69,26 @@ namespace CbgTaxi24.Blazor.Services
         {
             return status switch
             {
+                DriverStatus.InTrip => "text-success",
                 DriverStatus.Suspended => "text-danger",
-                DriverStatus.Available => "text-success",
+                DriverStatus.Available => "text-primary",
                 DriverStatus.Unavailable => "text-info",
                 _ => string.Empty,
             };
+        }
+
+        public async Task<TripDto2> GetActiveTripAsync(Guid id)
+        {
+            return (await _httpClient.GetFromJsonAsync<TripDto2>($"drivers/active-trip/{id}"))!;
+        }
+
+        public async Task CompleteTripAsync(Guid id)
+        {
+            var response = await _httpClient.PutAsJsonAsync($"drivers/complete-trip/{id}", new { });
+
+            response.EnsureSuccessStatusCode();
+
+            //return JsonSerializer.Deserialize<TripDto2>(await response.Content.ReadAsStringAsync())!;
         }
 
         public static string GetServiceTypeCss(ServiceType type)

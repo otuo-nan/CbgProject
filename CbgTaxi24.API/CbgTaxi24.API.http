@@ -29,6 +29,9 @@ Accept: application/json
 GET {{HostAddress}}/api/Riders?pageSize=3&pageNum=1
 
 ###
+GET {{HostAddress}}/api/riders/active-trip/{id}
+
+###
 //specific rider
 GET {{HostAddress}}/api/Riders/4257C77B-30CE-4B3D-FB08-08DCA2D8F5F0
 Accept: application/json
@@ -50,7 +53,8 @@ Content-Type: application/json
 }
 
 ###
+GET {{HostAddress}}/api/drivers/active-trip/{id}
+
+###
 //BackOffice related
 GET {{HostAddress}}/api/BackOffice/trips?filter=All&pageSize=10&pageNum=1
-
-

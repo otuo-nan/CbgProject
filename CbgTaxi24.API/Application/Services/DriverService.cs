@@ -9,15 +9,18 @@ namespace CbgTaxi24.API.Application.Services
     {
         public async Task<InvoiceDto> CompleteTripAsync(Guid tripId)
         {
-            var trip = await dbContext.Trips.Include(t => t.Rider)
-                                            .Include(t => t.Driver)
-                                            .SingleOrDefaultAsync(t => t.TripId == tripId) ?? throw new PlatformException("invalid trip");
+
 
             using IDbContextTransaction transaction = dbContext.Database.BeginTransaction();
             try
             {
+                var trip = await dbContext.Trips.Include(t => t.Rider)
+                                           .Include(t => t.Driver)
+                                           .SingleOrDefaultAsync(t => t.TripId == tripId) ?? throw new PlatformException("invalid trip");
+
                 trip.Status = TripStatus.Completed;
                 trip.Rider.IsInTrip = false;
+                trip.Driver.Status = DriverStatus.Available;
 
                 var invoice = new Invoice
                 {
@@ -30,6 +33,7 @@ namespace CbgTaxi24.API.Application.Services
 
                 await dbContext.SaveChangesAsync();
 
+                await transaction.CommitAsync();
                 return MapTripToInvoice(invoice.InvoiceId, trip);
             }
             catch (Exception ex)
@@ -76,6 +80,20 @@ namespace CbgTaxi24.API.Application.Services
                 DriverId = trip.DriverId,
                 Status = trip.Status,
             };
+        }
+
+        public async Task<TripDto2?> GetDriverActiveTripAsync(Guid id)
+        {
+            var trip = await dbContext.Trips.Include(t => t.Driver)
+                                    .Include(t => t.Rider)
+                                    .FirstOrDefaultAsync(t => t.Status == Models.TripStatus.Active && t.DriverId == id);
+
+            if (trip != null)
+            {
+                return TripDto2.MapTrip(trip);
+            }
+
+            throw new PlatformException("no active trip found");
         }
     }
 }

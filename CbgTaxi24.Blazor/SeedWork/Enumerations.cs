@@ -11,7 +11,7 @@ namespace CbgTaxi24.Blazor.SeedWork
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum DriverStatus : byte
     {
-        Available = 1, Unavailable = 2, Suspended = 3
+        Available = 1, Unavailable = 2, InTrip = 3, Suspended = 4
     }
 
 

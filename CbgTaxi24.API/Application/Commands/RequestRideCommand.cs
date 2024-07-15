@@ -44,6 +44,8 @@ namespace CbgTaxi24.API.Application.Commands
             {
                 rider.IsInTrip = true;
 
+                await _dbContext.Drivers.Where(d => d.DriverId == driver.DriverId).ExecuteUpdateAsync(setter => setter.SetProperty(c => c.Status, DriverStatus.InTrip), cancellationToken: cancellationToken);
+
                 var trip = new Trip
                 {
                     FromLat = (decimal)request.CurrentLatitude,

@@ -144,6 +144,7 @@ namespace CbgTaxi24.Blazor.Components.Drivers
                             FilterOption.Select,
                             DriverStatus.Available.ToString(),
                             DriverStatus.Unavailable.ToString(),
+                            DriverStatus.InTrip.ToString(),
                             DriverStatus.Suspended.ToString(),
                         };
                         driverPagerOptions.FilterBy = DriverListFilterBy.DriverStatus;

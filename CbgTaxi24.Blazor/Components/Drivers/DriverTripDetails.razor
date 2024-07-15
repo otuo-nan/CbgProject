@@ -14,8 +14,8 @@ else
             <h3>Destination</h3>
             <hr />
             <div>
-                <h4>Location</h4>
-                <p>@tripMetaData.ToLocation.Name</p>
+                <h4>Address</h4>
+                <p>@(string.IsNullOrEmpty(tripMetaData.ToLocation.Name) ? "n/a" : tripMetaData.ToLocation.Name)</p>
             </div>
             <div>
                 <h4>Latitude</h4>
@@ -31,29 +31,17 @@ else
             <h3>Driver</h3>
             <div>
                 <h4>Name</h4>
-                <p>@Trip.Driver.Name</p>
-            </div>
-            <div>
-                <h4>Phone</h4>
-                <p>@Trip.Driver.Phone</p>
-            </div>
-            <div>
-                <h4>Licence Plate</h4>
-                <p>@Trip.Driver.CarNumber</p>
-            </div>
-            <div>
-                <h4>Service</h4>
-                <p class="@DriverService.GetServiceTypeCss(Trip.Driver.ServiceType)">@Trip.Driver.ServiceType</p>
+                <p>@Trip.Rider.Name</p>
             </div>
         </div>
 
-        <h2 class="text-success">On you way to destination</h2>
+        <h2 class="text-success">On you way to your destination</h2>
     </div>
 
 }
 
 @code {
-    #nullable disable
+#nullable disable
     [Parameter]
     public TripDto2 Trip { get; set; }
 

@@ -1,7 +1,8 @@
 ﻿@page "/driver-details/{id}"
+@using CbgTaxi24.Blazor.Components.Drivers
 @using CbgTaxi24.Blazor.Services
 
-@if (entity == null && isProcessing)
+@if (driver == null && isProcessing)
 {
     <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -9,7 +10,7 @@
 }
 else
 {
-    <div class="card" style="width: 900px; height: 500px;">
+    <div class="card" style="width: 900px; height: 800px;">
         <div class="card-body">
             <div>
                 <h3>Driver details</h3>
@@ -19,42 +20,53 @@ else
                 <div class="details_list">
                     <div>
                         <h4>Name</h4>
-                        <p>@entity.Name</p>
+                        <p>@driver.Name</p>
                     </div>
                     <div>
                         <h4>Phone</h4>
-                        <p>@entity.Phone</p>
+                        <p>@driver.Phone</p>
                     </div>
                     <div>
                         <h4>Licence Plate</h4>
-                        <p>@entity.CarNumber</p>
+                        <p>@driver.CarNumber</p>
                     </div>
                     <div>
                         <h4>Status</h4>
-                        <p class="@DriverService.GetDriverStatusCss(@entity.Status)">@entity.Status</p>
+                        <p class="@DriverService.GetDriverStatusCss(driver.Status)">@driver.Status</p>
                     </div>
                     <div>
                         <h4>Service</h4>
-                        <p class="@DriverService.GetServiceTypeCss(entity.ServiceType)">@entity.ServiceType</p>
+                        <p class="@DriverService.GetServiceTypeCss(driver.ServiceType)">@driver.ServiceType</p>
                     </div>
                 </div>
-                <div class="details_list">
-                    <h1>Recent Location</h1>
-                    <div>
-                        <h4>Location</h4>
-                        <p>@entity.LocationName</p>
-                    </div>
-                    <div>
-                        <h4>Latitude</h4>
-                        <p>@entity.Latitude</p>
 
-                    </div>
-                    <div>
+                @if (driver.Status != DriverStatus.InTrip)
+                {
+                    <div class="details_list">
+                        <h1>Recent Location</h1>
+                        <div>
+                            <h4>Address</h4>
+                            <p>@(string.IsNullOrEmpty(driver.LocationName) ? "n/a" : driver.LocationName)</p>
+                        </div>
+                        <div>
+                            <h4>Latitude</h4>
+                            <p>@driver.Latitude</p>
 
-                        <h4>Longitude</h4>
-                        <p>@entity.Longitude</p>
+                        </div>
+                        <div>
+
+                            <h4>Longitude</h4>
+                            <p>@driver.Longitude</p>
+                        </div>
                     </div>
-                </div>
+                }
+                else
+                {
+                    <div>
+                        <DriverTripDetails Trip="driverTrip"></DriverTripDetails>
+                        <button class="btn btn-primary mt-5 @GetCompleteTripButtonStatus()" @onclick=CompleteTrip_Clicked>Complete trip</button>
+                    </div>  
+                }
             </div>
         </div>
     </div>

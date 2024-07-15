@@ -1,4 +1,5 @@
 ﻿using CbgTaxi24.API.Application.Requests;
+using CbgTaxi24.API.Application.Services;
 
 namespace CbgTaxi24.API.Controllers
 {
@@ -61,6 +62,13 @@ namespace CbgTaxi24.API.Controllers
         public async Task<IActionResult> CompleteTrip([FromServices]DriverService service, Guid id)
         {
             return Ok(await service.CompleteTripAsync(id));
+        }
+
+        [HttpGet("active-trip/{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(TripDto))]
+        public async Task<IActionResult> ActiveTrip([FromServices] DriverService service, Guid id)
+        {
+            return Ok(await service.GetDriverActiveTripAsync(id));
         }
     }
 }
