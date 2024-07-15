@@ -1,7 +1,7 @@
 # CbgProject 
 This project contains the following applications
 
-- Taxi 24 API - enables other companies can use to manage their fleet of drivers and allocate drivers to passengers
+- Taxi 24 API - enables other companies to use to manage their fleet of drivers and allocate drivers to passengers
 - Blazor Application - serving as a UI to showcase API use
 
 ## Setup
